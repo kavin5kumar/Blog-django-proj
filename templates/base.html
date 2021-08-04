@@ -8,10 +8,23 @@
         <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <h1><a href="{% url 'home' %}">Japanese Resources for Self Learners</a></h1>
-        </header>
         <div>
+            <header>
+                <div class="nav-left">
+                    <h1><a href="{% url 'home' %}">Japanese Resources for Self Learners</a></h1>
+                </div>
+                <div class="nav-right">
+                    <a href="{% url 'post-new' %}" id="new-b">+ New Blog</a>
+                    {% if user.is_authenticated %}
+                        <p>Hi {{ user.username }}</p>
+                        <p><a href="{% url 'logout' %}">Log Out</a></p>
+                    {% else %}
+                        <p>You are not Logged in.</p>
+                        <a href="{% url 'login' %}">Sign In</a>
+                        <a href="{% url 'signup' %}">Register</a>
+                    {% endif %}
+                </div>
+            </header>
             {% block content %}
             {% endblock content %}
         </div>
